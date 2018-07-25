@@ -8,30 +8,31 @@
  */
 
 get_header(); ?>
+	<header class="innerpage-header p-5">
+		<h1 class="text-center innerpage-title"><?php the_title(); ?></h1>
+	</header>
+	<div class="container">
+		<div id="primary" class="content-area">
+			<?php
+				if ( function_exists('yoast_breadcrumb') ) {
+					yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+				}
+			?>			
+			<main id="main" class="site-main" role="main">
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+			<?php if ( have_posts() ) : ?>
 
-		<?php if ( have_posts() ) : ?>
+				<?php get_template_part( 'loop' );
 
-			<header class="page-header">
-				<?php
-					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					the_archive_description( '<div class="taxonomy-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
+			else :
 
-			<?php get_template_part( 'loop' );
+				get_template_part( 'content', 'none' );
 
-		else :
+			endif; ?>
 
-			get_template_part( 'content', 'none' );
-
-		endif; ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
+			</main><!-- #main -->
+		</div><!-- #primary -->
+	</div>
 <?php
 do_action( 'storefront_sidebar' );
 get_footer();
